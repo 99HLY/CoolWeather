@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent=getIntent();
+        int pid=intent.getIntExtra("pid",0);
+        Log.i("我们接收到了id",""+pid);
         this.textView = (TextView) findViewById(R.id.abc);
         this.button = (Button) findViewById(R.id.button1);
         this.button.setOnClickListener(new View.OnClickListener() {
@@ -32,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String weatherId = "CN101020200";
-        String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=f691985632d949abb8df27de3516d2f3";
+        String weatherUrl = "http://guolin.tech/api/china/" +pid;
+        //http://guolin.tech/api/weather?cityid=
         HttpUtil.sendOkHttpRequest(weatherUrl,new Callback(){
             @Override
             public void onFailure(Call call, IOException e) {
