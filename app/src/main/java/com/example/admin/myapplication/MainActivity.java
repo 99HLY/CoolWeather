@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         String weatherUrl = "http://guolin.tech/api/china/" +pid;
         //http://guolin.tech/api/weather?cityid=
         HttpUtil.sendOkHttpRequest(weatherUrl,new Callback(){

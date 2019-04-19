@@ -77,7 +77,6 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
-
     }
     private void parseJSONObject(String responseText) {
         JSONArray jsonArray= null;
