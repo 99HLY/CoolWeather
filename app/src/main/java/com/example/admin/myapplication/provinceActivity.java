@@ -23,7 +23,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class Main2Activity extends AppCompatActivity {
+public class provinceActivity extends AppCompatActivity {
 
     private List<String> data2=new ArrayList();
     private String[] data={"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
@@ -36,13 +36,16 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        Intent intent=getIntent();
+        int pid=intent.getIntExtra("pid",0);
+        final int cid=intent.getIntExtra("cid",0);
         this.textView = (TextView) findViewById(R.id.abcd);
         this.button = (Button) findViewById(R.id.button);
 
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main2Activity.this, MainActivity.class));
+                startActivity(new Intent(provinceActivity.this, cityActivity.class));
             }
         });
         this.listView = (ListView)findViewById(R.id.listview);
@@ -51,9 +54,10 @@ public class Main2Activity extends AppCompatActivity {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("点击了哪一个",""+position+":"+Main2Activity.this.pids[position]+":"+Main2Activity.this.data[position]);
-                Intent intent=new Intent(Main2Activity.this,MainActivity.class);
-                intent.putExtra("pid",Main2Activity.this.pids[position]);
+                Log.i("点击了哪一个",""+position+":"+provinceActivity.this.pids[position]+":"+provinceActivity.this.data[position]);
+                Intent intent=new Intent(provinceActivity.this,cityActivity.class);
+                intent.putExtra("pid",provinceActivity.this.pids[position]);
+                intent.putExtra("cid",cid);
                 startActivity(intent);
             }
         });

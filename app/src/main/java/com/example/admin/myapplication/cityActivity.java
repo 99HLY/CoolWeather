@@ -14,7 +14,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class cityActivity extends AppCompatActivity {
 
     private TextView textView;
     private Button button;
@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent=getIntent();
         int pid=intent.getIntExtra("pid",0);
+        final int cid=intent.getIntExtra("cid",0);
         Log.i("我们接收到了id",""+pid);
         this.textView = (TextView) findViewById(R.id.abc);
         this.button = (Button) findViewById(R.id.button1);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                startActivity(new Intent(cityActivity.this, provinceActivity.class));
             }
         });
 
