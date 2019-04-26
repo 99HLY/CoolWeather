@@ -23,7 +23,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class provinceActivity extends AppCompatActivity {
+public class ProvinceActivity extends AppCompatActivity {
 
     private List<String> data2=new ArrayList();
     private String[] data={"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
@@ -45,7 +45,7 @@ public class provinceActivity extends AppCompatActivity {
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(provinceActivity.this, cityActivity.class));
+                startActivity(new Intent(ProvinceActivity.this, CityActivity.class));
             }
         });
         this.listView = (ListView)findViewById(R.id.listview);
@@ -54,10 +54,10 @@ public class provinceActivity extends AppCompatActivity {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("点击了哪一个",""+position+":"+provinceActivity.this.pids[position]+":"+provinceActivity.this.data[position]);
-                Intent intent=new Intent(provinceActivity.this,cityActivity.class);
-                intent.putExtra("pid",provinceActivity.this.pids[position]);
-                intent.putExtra("cid",cid);
+                Log.i("点击了哪一个",""+position+":"+ProvinceActivity.this.pids[position]+":"+ProvinceActivity.this.data[position]);
+                Intent intent=new Intent(ProvinceActivity.this,CityActivity.class);
+                intent.putExtra("pid",ProvinceActivity.this.pids[position]);
+
                 startActivity(intent);
             }
         });
