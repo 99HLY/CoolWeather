@@ -15,13 +15,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
 public class CountyActivity extends AppCompatActivity {
-    private String[] data={"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
+    private List<String> data2=new ArrayList();
+    private List<String> data=new ArrayList<>();
     private String[] weather_ids={"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
     private TextView textView=null;
     private ListView countylistview;
@@ -35,7 +38,7 @@ public class CountyActivity extends AppCompatActivity {
         Intent intent=getIntent();
         int cityid=intent.getIntExtra("cid",0);
         int pid=intent.getIntExtra("pid",0);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
         countylistview.setAdapter(adapter);
         this.countylistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,6 +60,7 @@ public class CountyActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         textView.setText(responseText);
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -74,7 +78,7 @@ public class CountyActivity extends AppCompatActivity {
             String[] result=new String[jsonArray.length()];
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
-                this.data[i]=jsonObject.getString("name");
+                this.data.add(jsonObject.getString("name"));
                 this.weather_ids[i]=jsonObject.getString("weather_id");
             }
         } catch (JSONException e) {

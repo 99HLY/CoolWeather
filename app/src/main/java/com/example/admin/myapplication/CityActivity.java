@@ -25,7 +25,7 @@ import okhttp3.Response;
 
 public class CityActivity extends AppCompatActivity {
     private List<String> data2=new ArrayList();
-    private String[] data={"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
+    private List<String> data=new ArrayList<>();
     //
     private int[] cids =new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     private TextView textView;
@@ -51,12 +51,12 @@ public class CityActivity extends AppCompatActivity {
         });
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
         citylistview.setAdapter(adapter);
         this.citylistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("点击了哪一个",""+position+":"+cids[position]+":"+data[position]);
+                Log.i("点击了哪一个",""+position+":"+cids[position]+":"+data.get(position));
                 Intent intent=new Intent(CityActivity.this,CountyActivity.class);
                 intent.putExtra("pid",pid);
                 intent.putExtra("cid",cids[position]);
@@ -79,6 +79,7 @@ public class CityActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         textView.setText(responseText);
+                        adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -92,7 +93,7 @@ public class CityActivity extends AppCompatActivity {
             String[] result=new String[jsonArray.length()];
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
-                this.data[i]=jsonObject.getString("name");
+                this.data.add(jsonObject.getString("name"));
                 this.cids[i]=jsonObject.getInt("id");
             }
         } catch (JSONException e) {
