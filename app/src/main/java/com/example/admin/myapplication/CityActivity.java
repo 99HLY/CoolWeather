@@ -78,7 +78,7 @@ public class CityActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(responseText);
+                        //textView.setText(responseText);
                         adapter.notifyDataSetChanged();
                     }
                 });
